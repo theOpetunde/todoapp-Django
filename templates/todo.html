@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To do app</title>
+</head>
+<body>
+    <h1>This is the To-do page</h1>
+
+    <!-- <ul> to comment multiple lines in html CTRL+K+C
+        <li>Do a django project</li>
+        <li>Push to Github</li>
+        <li>Go home</li>
+    </ul> -->
+    <ul>
+      {% for todo_item in all_items %}
+      <li>{{todo_item.content}}
+        <form action="/deleteTodo/{{todo_item.id}}/" 
+        style="display: inline;"
+        method="post">{%csrf_token%}
+            <input type="submit" value="Delete"/>
+          </form>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <form action="/addTodo/" method="post">{%csrf_token%}
+      <input type="text" name="content"/>
+      <input type="submit" value="Add task"/>
+    </form>
+</body>
+</html>
